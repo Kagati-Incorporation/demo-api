@@ -69,7 +69,6 @@ class Slideshow(TimeStampedModel):
 
 
 class FAQCategory(Category):
-
     class Meta:
         verbose_name = 'FAQ Category'
         verbose_name_plural = 'FAQ Categories'

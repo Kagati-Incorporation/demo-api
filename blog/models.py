@@ -5,11 +5,9 @@ from common.models import SEOBaseModel, Category
 
 
 class BlogCategory(Category):
-
     class Meta:
         verbose_name = 'Blog Category'
         verbose_name_plural = 'Blog Categories'
-
 
 
 class Article(SEOBaseModel):

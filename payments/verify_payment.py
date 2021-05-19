@@ -1,11 +1,12 @@
+from decimal import Decimal
+
+from payments import status
 from payments.payment_verification_methods import (
     verify_imepay,
     verify_khalti,
     verify_esewa,
     verify_fonepay,
 )
-from decimal import Decimal
-from payments import status
 
 
 def verify_payment(user, data, payment_method):
@@ -26,7 +27,7 @@ def verify_payment(user, data, payment_method):
         status_code = verify_fonepay(user, data, amount)
     # cod
     elif payment_method == 'cod':
-        return status.PAYMENT_200_OK , currency
+        return status.PAYMENT_200_OK, currency
     else:
         status_code = status.PAYMENT_404_PAYMENT_METHOD_NOT_FOUND
     return status_code, currency

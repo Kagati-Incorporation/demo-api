@@ -19,12 +19,12 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'info', 'description', )
+    list_display = ('full_name', 'info', 'description',)
 
 
 @admin.register(PaymentMethod)
 class PaymentMethodAdmin(admin.ModelAdmin):
-    list_display = ('id' ,'method_name', 'charge')
+    list_display = ('id', 'method_name', 'charge')
 
 
 @admin.register(SEOSetting)
@@ -35,7 +35,6 @@ class SEOSettingsAdmin(admin.ModelAdmin):
 @admin.register(SocialLinkSetting)
 class SocialLinkSettingAdmin(admin.ModelAdmin):
     list_display = ('platform', 'link', 'icon',)
-
 
 
 @admin.register(FAQCategory)

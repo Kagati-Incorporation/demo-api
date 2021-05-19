@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import IMEPay, Payment
 
+
 class IMEPaySerializer(serializers.ModelSerializer):
     amount = serializers.IntegerField(min_value=1)
 
@@ -13,6 +14,7 @@ class IMEPaySerializer(serializers.ModelSerializer):
 
 class PaymentSerializer(serializers.ModelSerializer):
     method_name = serializers.CharField(source='method.method_name', read_only=True)
+
     class Meta:
         model = Payment
         fields = '__all__'

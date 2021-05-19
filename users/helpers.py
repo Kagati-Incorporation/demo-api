@@ -15,9 +15,9 @@ def validate_id_token(id_token):
     email = decoded.get('email')
     try:
         profile_pic = decoded.get('photoURL')
-    except :
+    except:
         profile_pic = None
-    phone_number =decoded.get('phoneNumber')
+    phone_number = decoded.get('phoneNumber')
     if uuid and email:
         user, created = User.objects.get_or_create(email=email)
         if created:

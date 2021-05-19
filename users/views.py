@@ -1,21 +1,20 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, status
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.decorators import action
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
 
 from .serializers import (
     UserAuthTokenSerializer,
     UserSerializer,
     UserRegisterSerializer,
 )
-
 
 User = get_user_model()
 
@@ -25,10 +24,9 @@ class UserAPIViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
     http_method_names = ['get', 'put', 'patch', ]
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    filterset_fields = ['is_active', 'is_staff',]
-    search_fields = ['full_name','email','phone_number']
-
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['is_active', 'is_staff', ]
+    search_fields = ['full_name', 'email', 'phone_number']
 
     @action(methods=['PUT'], detail=True, url_path='remove-admin-status')
     def remove_admin_status(self, request, pk):
@@ -38,7 +36,7 @@ class UserAPIViewSet(viewsets.ModelViewSet):
         user.save()
         return Response(
             {
-                'message':"Admin Status Removed"
+                'message': "Admin Status Removed"
             }, status.HTTP_202_ACCEPTED)
 
     @action(methods=['PUT'], detail=True, url_path='promote-to-admin')
@@ -49,7 +47,7 @@ class UserAPIViewSet(viewsets.ModelViewSet):
         user.save()
         return Response(
             {
-                'message':"Promoted to Admin"
+                'message': "Promoted to Admin"
             }, status.HTTP_202_ACCEPTED)
 
     @action(methods=['PUT'], detail=True, url_path='promote-to-superuser')
@@ -60,8 +58,9 @@ class UserAPIViewSet(viewsets.ModelViewSet):
         user.save()
         return Response(
             {
-                'message':"Promoted to Superuser"
+                'message': "Promoted to Superuser"
             }, status.HTTP_202_ACCEPTED)
+
 
 class UserProfileAPIViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer

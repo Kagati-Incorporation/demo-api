@@ -1,4 +1,3 @@
-
 from io import BytesIO
 
 from PIL import Image
@@ -29,5 +28,3 @@ def resize_image(image_file):
     image.save(image_file, 'webp', quality=100)
     new_image = File(image_file, name=f"{name}.webp")
     return new_image
-
-

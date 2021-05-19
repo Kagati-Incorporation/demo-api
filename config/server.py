@@ -30,7 +30,6 @@ STATIC_URL = f'{AWS_STORAGE_BUCKET_NAME}.s3.ap-south-1.amazonaws.com/{AWS_LOCATI
 
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
 
-
 # Django Deployment checklist
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

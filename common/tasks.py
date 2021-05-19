@@ -1,32 +1,33 @@
-from celery import shared_task
-from decouple import config
-import smtplib
 import email
+import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+from celery import shared_task
+from decouple import config
+
 
 @shared_task
-def send_email(subject,message,html_content,to_mail,from_mail):
-    username=from_mail
-    if from_mail=="order@mail.akku.gg":
-        password=config('ORDER_MAIL_PASSWORD',cast=str)
-    elif from_mail=='payment@mail.akku.gg':
-        password=config('PAYMENT_MAIL_PASSWORD',cast=str)
-    elif from_mail=='system@mail.akku.gg':
-        password=config('SYSTEM_MAIL_PASSWORD',cast=str)
+def send_email(subject, message, html_content, to_mail, from_mail):
+    username = from_mail
+    if from_mail == "order@mail.akku.gg":
+        password = config('ORDER_MAIL_PASSWORD', cast=str)
+    elif from_mail == 'payment@mail.akku.gg':
+        password = config('PAYMENT_MAIL_PASSWORD', cast=str)
+    elif from_mail == 'system@mail.akku.gg':
+        password = config('SYSTEM_MAIL_PASSWORD', cast=str)
     else:
-        username='akku@mail.akku.gg'
-        password=config('DEFAULT_MAIL_PASSWORD')
+        username = 'akku@mail.akku.gg'
+        password = config('DEFAULT_MAIL_PASSWORD')
 
-    rcptto=to_mail
+    rcptto = to_mail
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
     msg['From'] = f"Kunyo Is Marketing<{username}>"
 
     msg['To'] = ", ".join(rcptto)
     msg['Message-id'] = email.utils.make_msgid()
-    msg['Date'] = email.utils.formatdate() 
+    msg['Date'] = email.utils.formatdate()
     textplain = MIMEText(message, _subtype='plain', _charset='UTF-8')
     msg.attach(textplain)
     texthtml = MIMEText(html_content, _subtype='html', _charset='UTF-8')

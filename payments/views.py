@@ -8,6 +8,7 @@ from rest_framework.permissions import (
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from core.models import PaymentMethod
 from payments.models import (
     Payment
 )
@@ -18,7 +19,6 @@ from .serializers import (
 from .verify_payment import (
     verify_payment
 )
-from core.models import PaymentMethod
 
 
 class IMEPayTokenCreateAPI(APIView):
@@ -67,36 +67,36 @@ class CreatePaymentAPI(APIView):
         payment_method = request.data['payment_method']
         try:
             payment_method = PaymentMethod.objects.get(id=payment_method)
-        except :
+        except:
             return Response(
                 {
                     'message': 'Invalid Payment Method'
                 }, status.HTTP_406_NOT_ACCEPTABLE
-                )
+            )
         status_code, currency = verify_payment(
             user,
             request.data,
             payment_method.method_name.lower()
         )
 
-        if status_code==407:
+        if status_code == 407:
             return Response(
                 {
                     'message': 'Insuccifient Funds'
                 }, status.HTTP_400_BAD_REQUEST
             )
-        elif status_code==426:
+        elif status_code == 426:
             return Response(
                 {
                     'message': 'Duplicate Payment'
                 }, status.HTTP_406_NOT_ACCEPTABLE
             )
-        elif status_code==200:
-            payment_status="verified"
-        
+        elif status_code == 200:
+            payment_status = "verified"
+
         # For Testing Purpose only
-        if payment_method.method_name.lower()=='cod':
-            payment_status='unverified'
+        if payment_method.method_name.lower() == 'cod':
+            payment_status = 'unverified'
 
         payment = Payment.objects.create(
             method=payment_method,

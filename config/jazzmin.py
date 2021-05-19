@@ -19,60 +19,60 @@ JAZZMIN_SETTINGS = {
     ############
 
     # Links to put along the top menu
-        'topmenu_links': [
-                             # Url that gets reversed (Permissions can be added)
-                             {'name': 'Home', 'url': 'admin:index',
-                              'permissions': ['auth.view_user']},
+    'topmenu_links': [
+        # Url that gets reversed (Permissions can be added)
+        {'name': 'Home', 'url': 'admin:index',
+         'permissions': ['auth.view_user']},
 
-                             # model admin to link to (Permissions checked against model)
-                             {'model': 'users.User'},
-                             {'app': 'products'},
-                             {'app': 'core'},
-                             # App with dropdown menu to all its models pages (Permissions checked against models)
+        # model admin to link to (Permissions checked against model)
+        {'model': 'users.User'},
+        {'app': 'products'},
+        {'app': 'core'},
+        # App with dropdown menu to all its models pages (Permissions checked against models)
 
-                         ],
+    ],
 
-                         #############
-                         # User Menu #
-                         #############
+    #############
+    # User Menu #
+    #############
 
-                         # # Additional links to include in the user menu on the top right ('app' url type is not allowed)
-                         # 'usermenu_links': [
-                         #     {'model': 'auth.user'},
-                         #     {'name': 'Support', 'url': 'https://ajaykarki.github.io',
-                         #         'new_window': True},
-                         # ],
+    # # Additional links to include in the user menu on the top right ('app' url type is not allowed)
+    # 'usermenu_links': [
+    #     {'model': 'auth.user'},
+    #     {'name': 'Support', 'url': 'https://ajaykarki.github.io',
+    #         'new_window': True},
+    # ],
 
-                         #############
-                         # Side Menu #
-                         #############
+    #############
+    # Side Menu #
+    #############
 
-                         # Whether to display the side menu
-                         'show_sidebar': True,
+    # Whether to display the side menu
+    'show_sidebar': True,
 
-# Whether to aut expand the menu
-'navigation_expanded': True,
+    # Whether to aut expand the menu
+    'navigation_expanded': True,
 
-# Hide these apps when generating side menu e.g (auth)
-'hide_apps': [],
+    # Hide these apps when generating side menu e.g (auth)
+    'hide_apps': [],
 
-# Hide these models when generating side menu (e.g auth.user)
-'hide_models': [],
+    # Hide these models when generating side menu (e.g auth.user)
+    'hide_models': [],
 
-# List of apps to base side menu ordering off of (does not need to contain all apps)
-# 'order_with_respect_to': ['accounts', 'polls'],
+    # List of apps to base side menu ordering off of (does not need to contain all apps)
+    # 'order_with_respect_to': ['accounts', 'polls'],
 
-# Custom links to append to app groups, keyed on app name
+    # Custom links to append to app groups, keyed on app name
 
-# Custom icons for side menu apps/models See https://www.fontawesomecheatsheet.com/font-awesome-cheatsheet-5x/
-# for a list of icon classes
-'icons': {
-    'auth': 'fas fa-users-cog',
-    'auth.user': 'fas fa-user',
-    'auth.Group': 'fas fa-users',
-},
-# 'custom_css': 'css/admin.css',
-#  "show_ui_builder": True,
+    # Custom icons for side menu apps/models See https://www.fontawesomecheatsheet.com/font-awesome-cheatsheet-5x/
+    # for a list of icon classes
+    'icons': {
+        'auth': 'fas fa-users-cog',
+        'auth.user': 'fas fa-user',
+        'auth.Group': 'fas fa-users',
+    },
+    # 'custom_css': 'css/admin.css',
+    #  "show_ui_builder": True,
 
 }
 

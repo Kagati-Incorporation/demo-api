@@ -5,7 +5,6 @@ from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from common.permissions import IsAdminUserOrReadOnly
 from common.tasks import send_email
 from .models import (
@@ -92,7 +91,7 @@ class SEOSettingsAPI(APIView):
                 subject = f'SEO Settings Changed'
                 message = f'SEO Settings in Kunyo is Marketing has changed'
                 html_content = render_to_string('seo_setting_change.html', {'settings': p})
-                to_mail = ['techkagati@gmail.com',]
+                to_mail = ['techkagati@gmail.com', ]
                 send_email.delay(subject, message, html_content, to_mail, from_mail="system@mail.akku.gg")
                 return Response(serializer.data, status.HTTP_200_OK)
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
@@ -123,7 +122,7 @@ class SlideShowViewSet(viewsets.ModelViewSet):
     search_fields = ['caption', ]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request':request})
+        serializer = self.serializer_class(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -164,7 +163,7 @@ class PaymentMethodViewSet(viewsets.ModelViewSet):
     queryset = PaymentMethod.objects.all()
 
     def create(self, request):
-        serializer = self.serializer_class(data=request.data, context={'request':request})
+        serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -179,7 +178,7 @@ class PaymentMethodViewSet(viewsets.ModelViewSet):
         """
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial, context={'request':request})
+        serializer = self.get_serializer(instance, data=request.data, partial=partial, context={'request': request})
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(

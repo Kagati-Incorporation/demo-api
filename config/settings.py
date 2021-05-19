@@ -10,13 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
-from decouple import config
 from datetime import timedelta
+from pathlib import Path
+
+from decouple import config
+
 from .jazzmin import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -144,7 +146,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -158,14 +159,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Firebase Settings
 FIREBASE_KEY = config('FIREBASE_KEY')
 
 FIREBASE_KEY_PATH = BASE_DIR / FIREBASE_KEY
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 FONEPAY_VERIFY_URL = 'https://clientapi.fonepay.com/api/merchantRequest/verificationMerchant?'
 FONEPAY_MERCHANT_CODE = config('FONEPAY_MERCHANT_CODE')
@@ -190,7 +189,6 @@ CYBERSOURCE_PROFILE_ID = config('CYBERSOURCE_PROFILE_ID')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 try:
     env_local = config('ENVIRONMENT')
     if env_local.lower() == 'local':
@@ -199,7 +197,6 @@ try:
         from config.server import *
 except AttributeError:
     from config.server import *
-
 
 # CELERY STUFF
 CELERY_BROKER_URL = 'redis://localhost:6379'

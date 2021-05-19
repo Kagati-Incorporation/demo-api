@@ -6,6 +6,7 @@ import random
 import time
 import uuid
 from base64 import b64encode
+
 from django.conf import settings
 
 
@@ -71,5 +72,3 @@ def generate_hash_cybersource(amt):
                          digestmod=hashlib.sha256).digest()
     return b64encode(hmac_hash).decode(), transaction_uuid, reference_number, \
            signed_date_time, auth_trans_ref_no, string
-
-
