@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+    db:
+        image: "postgres:13.2-alpine"
+        environment:
+            - POSTGRES_DB=db_name
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        restart: always
+    redis:
+        image: "redis:5.0.12-alpine"
+        volumes:
+            - redis:/data
+        restart: always
+
+    web:
+        build: .
+        command: >
+            sh -c "python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - .:/demo
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+        environment:
+            - DB_HOST=db
+            - DB_NAME=db_name
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
+    celery:
+        restart: always
+        build:
+            context: .
+        command: celery -A config worker -l info
+        volumes:
+            - .:/demo
+        environment:
+            - DB_HOST=db
+            - DB_NAME=db_name
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
+        depends_on:
+            - db
+            - redis
+            - web
+
+volumes:
+    postgres_data:
+    redis:
